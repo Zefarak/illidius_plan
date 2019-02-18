@@ -1,0 +1,14 @@
+<style>
+    .footer__ {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;
+      }
+</style>
+{% if not request.COOKIES.cookie_law_europe %}
+<div class="footer__">This site uses cookies. <strong><a href="{% url 'my_cookie_law' %}">Got it</a></strong>.</div>
+{% endif %}

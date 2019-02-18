@@ -1,0 +1,100 @@
+{% extends 'english/index.html' %} {% load staticfiles %}
+
+{% block seo %} {% endblock %}
+{% block my_static %}
+    <link rel="stylesheet" href="{% static 'short_url/short_url.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.0/clipboard.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <section id="hero-area" >
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+                    <!-- Slider -->
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >
+                            <span>A blog about </span><br>
+                            <span class="cd-words-wrapper">
+                                <b class="is-visible">Django</b>
+                                <b>Python tips</b>
+                                <b>Html CSS</b>
+                                <b>Javascript</b>
+                            </span>
+                        </h1>
+                    </section> <!-- cd-intro -->
+                                <!-- /.slider -->
+                            <h2 class="wow fadeInUp animated" data-wow-delay=".6s" >
+                                    In a sea of ordinary, make sure your website is set apart from the competition.
+                            </h2>
+                            <a class="btn-lines dark light wow fadeInUp animated smooth-scroll btn btn-default btn-green" data-wow-delay=".9s" href="#works" data-section="#works" >View Works</a>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+    <section id="works" class="works">
+        <div class="container-fluid">
+
+            <div class="section-heading">
+                    <h1 class="title wow fadeInDown" data-wow-delay=".3s">Latest Works</h1>
+                    <p class="wow fadeInDown" data-wow-delay=".5s">
+                        See and explore my latest works!
+                    </p>
+                </div>
+                <div id="short-banner" class="global-page-header">
+        <form method="post" id="banner-form" class="form-inline">{% csrf_token %}
+            <div class="form-group">
+                {% for field in form %}
+                    <label class="sr-only" for="exampleInputAmount">{{ field.label_tag }}</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">{{ field.label_tag }}</div>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                    <label class="alert-warning">{{ field.errors }}</label>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Get Short URL</button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                 <div class="row">
+                    <h1>Results</h1>
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <h2>Results</h2>
+                                <input type="text" class="form-control" id="txt-copy" value="{{ message }}">
+                                <button type="button" data-clipboard-target="#txt-copy" class="btn btn-primary copy-button" alt="Copy to clipboard">Copy To Clipboard</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+            </div>
+        </section>
+
+
+{% endblock %}
+
+{% block additional_js %}
+    <script type="text/javascript">
+          $(document).ready(function(){
+            var clipboard = new Clipboard('.btn');
+             clipboard.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+          });
+    </script>
+{% endblock %}

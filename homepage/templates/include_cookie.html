@@ -1,0 +1,5 @@
+{% if not request.COOKIES.cookie_law %}
+    <div class="row">
+        <p>This site uses cookies! <a href="{% url 'my_cookie_law' %}">Got it!</a> </p>
+    </div>
+{% endif %}

@@ -1,0 +1,116 @@
+{% extends 'tim/index.html' %} {% load static %}
+
+{% block seo %}
+    <title>simply-chris | Blog </title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+{% block content %}
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url({% static 'assets/img/blog.jpg' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h1 class="title">{{ object.title_eng }}</h1>
+                    <h4>{{ object.short_description_eng }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="main main-raised">
+        <div class="container">
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 ml-auto mr-auto">
+                            <h2 class="title">Latest Posts</h2>
+                            <br>
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/django-expenses-7dfd8fb13fc9">Django Expenses - Christos Stathakis - Medium</a></h4>
+                                <p>Be aware because is on free tier of heroku maybe will be need on first visit about 20-30 sec to load, then anything is fine!
+                                    And if you want to add data We will create a webapp, which we will add our...</p>
+                            </blockquote>
+                            <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                            <br><br>
+
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/a-story-about-django-react-and-a-cafe-restaurant-webapp-part-1-backend-337bb9b0311e">A Story about Django, React and a cafe restaurant webapp. Part 1 BackEnd</a></h4>
+                                <p>In this tutorial we will create a API with Django and Rest Framework, which will manage, save and store all the data React will send us A live api can be found here → https://react-pos.herokuapp.com/api/ On this two part tutorial, our plan is to create two different technologies on each part.</p>
+                            </blockquote>
+
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/pos-react-frontend-f04177d9db0">A Story about Django React and restaurant webapp. Part 2 Frontend.</a></h4>
+                                <p>A little explain... this guide is for building a Cafe or Restaurant Order Management App.
+                                    This is the second part of the series . The Part One is for building the backend with django and rest
+                                    framework and you can find it here. In this guide we will use React for building the frontend.</p>
+                            </blockquote>
+
+                            {% comment %}
+                                {% if forloop.counter0|divisibleby:2 %}
+                                    <div class="card card-plain card-blog">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="card-header card-header-image">
+                                                    <a href="{% url 'blog_page_eng' post.slug %}">
+                                                        <img class="img" src="{{ post.file.url }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h6 class="card-category text-info">{{ post.category.title }}</h6>
+                                                <h3 class="card-title">
+                                                    <a href="{% url 'blog_page_eng' post.slug %}">{{ post.title_eng }}</a>
+                                                </h3>
+                                                <p class="card-description">
+                                                    {{ post.description_eng|truncatechars:20 }}
+                                                    <a href="{% url 'blog_page_eng' post.slug %}"> Read More </a>
+                                                </p>
+                                                <p class="author">
+                                                    by
+                                                    <a href="#pablo">
+                                                        <b>Christos Stathakis</b>
+                                                    </a>, {{ post.publish|timesince }} ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="card card-plain card-blog">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <h6 class="card-category text-info">{{ post.category.title }}</h6>
+                                                <h3 class="card-title">
+                                                    <a href="{% url 'blog_page_eng' post.slug %}">{{ post.title_eng }}</a>
+                                                </h3>
+                                                <p class="card-description">
+                                                    {{ post.description_eng|truncatechars:20 }}
+                                                    <a href="{% url 'blog_page_eng' post.slug %}"> Read More </a>
+                                                </p>
+                                                <p class="author">
+                                                    by
+                                                    <a href="#pablo">
+                                                        <b>Christos Stathakis</b>
+                                                    </a>, {{ post.publish|timesince }} ago
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="card-header card-header-image">
+                                                    <a href="{% url 'blog_page_eng' post.slug %}">
+                                                        <img class="img" src="{{ post.file.url }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endcomment %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+{% endblock %}

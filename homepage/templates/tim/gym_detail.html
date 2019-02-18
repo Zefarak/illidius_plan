@@ -1,0 +1,151 @@
+{% extends 'tim/index.html' %} {% load static %}
+
+{% block seo %}
+    <title>simply-chris | Gym App - {{ person }}</title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+{% block content %}
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url({% static 'assets/img/crossfit.png' %});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h1 class="title">A program about </h1>
+                    <h4>
+                        <b class="is-visible">Deadlifts</b>
+                        <b>Squats</b>
+                        <b>Shoulder Press</b>
+                        <b>Bench</b>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="about-team team-1">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">{{ person }}</h2>
+                        <h5 class="description">
+                            <a href="https://www.t-nation.com/workouts/531-how-to-build-pure-strength">Go to Program Page</a>
+                        </h5>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-4">
+                    <h2>Filters</h2>
+                    <br>
+                    {% if user.is_authenticated %}
+                    <form method="post">{% csrf_token %}
+                        {{ form }}
+                        <button class="btn btn-success" type="submit">Save</button>
+                    </form>
+                    {% else %}<p>You need to login to change the data</p> {% endif %}
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Deadlift - {{ person.deadlift }} kg</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="number">Week 1</th>
+                                <th class="number">Week 2</th>
+                                <th class="number">Week 3</th>
+                                <th class="number">Week 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for set in deadlift %}
+                            <tr>
+                                <th class="tdYellow">Set {{ forloop.counter }}</th>
+                                <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                                <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                                <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                                <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                    <h4>Shoulders press -- {{ person.shoulder_press }} kg</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="number">Week 1</th>
+                                <th class="number">Week 2</th>
+                                <th class="number">Week 3</th>
+                                <th class="number">Week 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for set in shoulder_press %}
+                                <tr>
+                                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                                    <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+            <h4>Squats -- {{ person.squats }} kg</h4>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="number">Week 1</th>
+                <th class="number">Week 2</th>
+                <th class="number">Week 3</th>
+                <th class="number">Week 4</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr>
+                 {% for set in squats %}
+                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                     <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        <br>
+         <h4>Bench Press -- {{ person.bench_press }} kg</h4>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="number">Week 1</th>
+                <th class="number">Week 2</th>
+                <th class="number">Week 3</th>
+                <th class="number">Week 4</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr>
+                 {% for set in bench_press %}
+                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                     <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends 'english/index.html' %}
+
+{% block seo %}
+    <title>simply-chris | Gym App</title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+
+
+{% block content %}
+
+    <section class="gym_banner" >
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning">
+                            {{ message }}<br/>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div style="margin-top:10%" class="row">
+            <div class="col-md-12 text-center">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+                    <!-- Slider -->
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >
+                            <span>A program about </span><br>
+                            <span class="cd-words-wrapper">
+                                <b class="is-visible">Deadlifts</b>
+                                    <b>Squats</b>
+                                    <b>Shoulder Press</b>
+                                    <b>Bench</b>
+                            </span>
+                        </h1>
+                    </section> <!-- cd-intro -->
+                            <!-- /.slider -->
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s" >
+                        5/3/1: How to Build Pure Strength
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="works">
+        <div class="container">
+            <div class="section-heading">
+                    <h2 class="title wow fadeInDown" data-wow-delay=".3s">Use your Data!</h2>
+                    <p class="wow fadeInDown" data-wow-delay=".5s">
+                        Put the data on the form and see the results!
+                        <br>
+                        <a href="https://www.t-nation.com/workouts/531-how-to-build-pure-strength">Go to Program Page</a>
+                    </p>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-lg-2">
+                    <h4 class="title wow fadeInDown" data-wow-delay=".3s">Use your max squat on every exercise</h4>
+                    <form method="get">
+                        <label>Deadlift</label>
+                        <input step='0.1' class="form-control" {% if get_deadlift %} value="{{ get_deadlift }}" {% endif %} name="deadlift" type="number" placeholder="Max Deadlift Weight" required>
+                        <label>Squat</label>
+                        <input step='0.1' class="form-control" {% if get_squat %} value="{{ get_squat }}" {% endif %} name="squats" type="number" placeholder="Max Squat Weight" required>
+                        <label>Bench</label>
+                        <input step='0.1' class="form-control" {% if get_bench %} value="{{ get_bench }}" {% endif %} name="bench" type="number" placeholder="Max Bench Weight" required>
+                        <label>Shoulder Press</label>
+                        <input step="0.1" class="form-control" {% if get_press %} value="{{ get_press }}" {% endif %} name="press" type="number" placeholder="Max Shoulder Press Weight" required>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+                <div class="col-md-10 col-sm-10 col-lg-10">
+                    <h2 class="title wow fadeInDown" data-wow-delay=".3s">Results</h2>
+                    <div class="col-md-5">
+                        <h4>Deadlift - {{ get_deadlift }} kg</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th class="number">Week 1</th>
+                                    <th class="number">Week 2</th>
+                                    <th class="number">Week 3</th>
+                                    <th class="number">Week 4</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for set in deadlift %}
+                                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                                    <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            </table>
+                            <br>
+                            <h4>Shoulders press -- {{ get_press }} kg</h4>
+                            <table class="table">
+                            <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="number">Week 1</th>
+                                <th class="number">Week 2</th>
+                                <th class="number">Week 3</th>
+                                <th class="number">Week 4</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for set in shoulder_press %}
+                                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                                    <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    <div class="col-md-5">
+            <h4>Squats -- {{ get_squat }} kg</h4>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="number">Week 1</th>
+                <th class="number">Week 2</th>
+                <th class="number">Week 3</th>
+                <th class="number">Week 4</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr>
+                 {% for set in squats %}
+                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                     <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        <br>
+         <h4>Bench Press -- {{ get_bench }} kg</h4>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="number">Week 1</th>
+                <th class="number">Week 2</th>
+                <th class="number">Week 3</th>
+                <th class="number">Week 4</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr>
+                 {% for set in bench_press %}
+                    <th class="tdYellow">Set {{ forloop.counter }}</th>
+                     <td class="number"><span style="color: red;">{{ set.0.0|floatformat:2 }} kg</span> x {{ set.0.1 }} reps </td>
+                    <td class="number"><span style="color: red;">{{ set.1.0|floatformat:2 }} kg</span> x {{ set.1.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.2.0|floatformat:2 }} kg</span> x {{ set.2.1 }} reps</td>
+                    <td class="number"><span style="color: red;">{{ set.3.0|floatformat:2 }} kg</span> x {{ set.3.1 }} reps</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="works">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h1 class="title wow fadeInDown" data-wow-delay=".3s">Gym Data</h1>
+                    <p class="wow fadeInDown" data-wow-delay=".5s">
+
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Person</th>
+                <th>Deadlift</th>
+                <th>Squats</th>
+                <th>Bench</th>
+                <th>Shoulder Press</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in object_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'gym_page_id' person.id %}"> {{ person }} </a></td>
+                <td>{{ person.deadlift }}</td>
+                <td>{{ person.squats }}</td>
+                <td>{{ person.bench_press }}</td>
+                <td>{{ person.shoulder_press }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

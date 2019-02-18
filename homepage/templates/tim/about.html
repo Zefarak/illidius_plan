@@ -1,0 +1,137 @@
+{% extends 'tim/index.html' %} {% load static %}
+
+{% block seo %}
+    <title>simply-chris | About </title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url({{ object.image.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h1 class="title">{{ object.title_eng }}</h1>
+                    <h4>{{ object.short_description_eng }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 ml-auto mr-auto">
+                    <div class="card card-signup">
+                        <h2 class="card-title text-center">Contact</h2>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-info">
+                                            <i class="material-icons">info</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">A little about me</h4>
+                                            <p class="description">
+                                                My name is Christos Stathakis and i am living in Greece.
+                                                I am a web developer using Python , Django, React etc, and
+                                                i am learning casual programing about machine learning etc.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-rose">
+                                            <i class="material-icons">email</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Emails</h4>
+                                            <p class="description">
+                                                christosstath10@gmail.com <br>
+                                                lirageika@hotmail.gr
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-primary">
+                                            <i class="material-icons">phone</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Phone</h4>
+                                            <p class="description">
+                                                6944899458
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5 mr-auto">
+                                    <div class="social text-center">
+                                        <button class="btn btn-just-icon btn-round btn-github">
+                                            <i class="fa fa-github"></i>
+                                        </button>
+                                        <a href="https://www.facebook.com/christos.stathakis.39" target="_blank" class="btn btn-just-icon btn-round btn-facebook">
+                                            <i class="fa fa-facebook"> </i>
+                                        </a>
+                                        <h4> or be classical </h4>
+                                    </div>
+                                    <form class="form" method="post">{% csrf_token %}
+                                        {{ form }}
+                                        <br><br>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h3 class="title text-center">Funny Projects</h3>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-plain card-blog">
+                            <div class="card-header card-header-image">
+                                <a href="{% url 'shorting_url' %}">
+                                    <img class="img img-raised" src="{% static 'assets/img/short_url.jpg' %}">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-category text-info">Funny</h6>
+                                <h4 class="card-title">
+                                    <a href="{% url 'shorting_url' %}">Shorting Url</a>
+                                </h4>
+                                <p class="card-description">
+                                    A simple web service with shorting url of any url you want with the use of your own code.
+                                    <a href="{% url 'shorting_url' %}"> Read More </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-plain card-blog">
+                            <div class="card-header card-header-image">
+                                <a href="{% url 'gym_page' %}">
+                                    <img class="img img-raised" src="{% static 'assets/img/crossfit.png' %}">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-category text-info">App</h6>
+                                <h4 class="card-title">
+                                    <a href="{% url 'gym_page' %}">Weight-lifting App</a>
+                                </h4>
+                                <p class="card-description">
+                                    A app that creates a table of data for the 5-3-1 program.
+                                    <a href="{% url 'gym_page' %}"> Read More </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

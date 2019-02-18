@@ -1,0 +1,142 @@
+{% extends 'tim/index.html' %} {% load static %}
+
+{% block seo %}
+    <title>simply-chris | Backgammon</title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="gym_banner" >
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning">
+                            {{ message }}<br/>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div style="margin-top:10%" class="row">
+            <div class="col-md-12 text-center">
+                <div class="block wow fadeInUp" data-wow-delay=".3s">
+                    <!-- Slider -->
+                    <section class="cd-intro">
+                        <h1 class="wow fadeInUp animated cd-headline slide" data-wow-delay=".4s" >
+                            <span>A program about </span><br>
+                            <span class="cd-words-wrapper">
+                                <b class="is-visible">Deadlifts</b>
+                                    <b>Squats</b>
+                                    <b>Shoulder Press</b>
+                                    <b>Bench</b>
+                            </span>
+                        </h1>
+                    </section> <!-- cd-intro -->
+                            <!-- /.slider -->
+                    <h2 class="wow fadeInUp animated" data-wow-delay=".6s" >
+                        5/3/1: How to Build Pure Strength
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="works">
+        <div class="container">
+            <div class="section-heading">
+                    <h2 class="title wow fadeInDown" data-wow-delay=".3s">{{ season }}</h2>
+                    <p class="wow fadeInDown" data-wow-delay=".5s">
+                        Season starts.. {{ season.date_start|date }}, Season Ends... {{ season.date_end|date }}
+                        <br>
+                        Minimum Games...{{ season.minimum_games }}
+                    </p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <h4 class="title wow fadeInDown" data-wow-delay=".3s">League Table</h4>
+                    <table class="table table-responsive table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Player</th>
+                                <th>Total Games</th>
+                                <th>Games Won</th>
+                                <th>Ratio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for player in players %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ player.player }}</td>
+                                    <td>{{ player.games_played }}</td>
+                                    <td>{{ player.games_won }}</td>
+                                    <td>{{ player.win_ratio }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td></td>
+                                    <td colspan="4">No players Added</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <h2 class="title wow fadeInDown" data-wow-delay=".3s">Games</h2>
+                    <table class="table table-responsive table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Home Player</th>
+                                <th>Score</th>
+                                <th>Opposite Player</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in games %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ game.date }}</td>
+                                    <td>{{ game.home }}</td>
+                                    <td>{{ game.home_score }} - {{ game.opponent_score }}</td>
+                                    <td>{{ game.opponent }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td></td>
+                                    <td colspan="4">No Games Added</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="works">
+            <div class="container">
+
+                <div class="section-heading">
+                    <h1 class="title wow fadeInDown" data-wow-delay=".3s">New Game</h1>
+                    <p class="wow fadeInDown" data-wow-delay=".5s"></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <form method="post">{% csrf_token %}
+                            {{ form }}
+                            <button type="submit" class="btn btn-send">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

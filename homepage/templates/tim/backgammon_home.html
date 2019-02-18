@@ -1,0 +1,95 @@
+{% extends 'tim/index.html' %} {% load static %}
+
+
+{% block seo %}
+    <title>simply-chris | Gym App</title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+{% block content %}
+    <br><br>
+    <div style="margin-top: 15%" class="main main-raised">
+        <div class="container">
+            <div class="about-team team-1">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Backgammon</h2>
+                        <h5 class="description">
+                            Results..{{ season }}
+                        </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="title wow fadeInDown" data-wow-delay=".3s">League Table</h4>
+                        <table class="table table-responsive table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Player</th>
+                                    <th>Ratio</th>
+                                    <th>Games won</th>
+                                    <th>Games Played</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in players %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ player }}</td>
+                                        <th>{{ player.win_ratio }}</th>
+                                        <td style="color:green;">{{ player.games_won }}</td>
+                                        <td>{{ player.games_played }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="title wow fadeInDown" data-wow-delay=".3s">Games</h2>
+                        <div class="row">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Home Player</th>
+                                        <th>Score</th>
+                                        <th>Opponent Player</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for game in games %}
+                                        <tr>
+                                            <td>{{ game.date }}</td>
+                                            <th>{{ game.home }}</th>
+                                            <td>{{ game.home_score }} - {{ game.opponent_score }}</td>
+                                            <th>{{ game.opponent }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="title text-center">New Game</h4>
+                    </div>
+                    <div class="card-body">
+                        <form class="form" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button class="btn btn-success" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

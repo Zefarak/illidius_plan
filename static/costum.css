@@ -1,0 +1,10 @@
+
+.gym_banner {
+    background: url('images/my_images/crossfit.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 800px;
+    color: white;
+}

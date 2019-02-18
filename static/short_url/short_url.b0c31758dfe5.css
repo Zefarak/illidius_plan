@@ -1,0 +1,17 @@
+#short-banner {
+    background: url("../short_url/short_url.3434b2fbcb6f.jpg") no-repeat center center fixed;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+    background-size: cover;
+    height: 1000px;
+}
+
+#banner-form {
+    margin-top: 15%;
+    text-align: center;
+}
+
+.well .row .input {
+    text-align: center;
+}

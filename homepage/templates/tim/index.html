@@ -1,0 +1,239 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    {% block seo %}
+        <title>
+            simply-chris | Homepage
+        </title>
+    {% endblock %}
+    {% include 'tim/include/css.html' %}
+    {% block my_static %}{% endblock %}
+</head>
+
+<body class="landing-page ">
+    {% include 'tim/include/third_parties.html' %}
+    {% include 'tim/include/navbar.html' %}
+    {% block content %}
+    <div class="page-header header-filter" data-parallax="true" style=" background-image: url('{% static 'assets/img/slider.jpg' %}'); ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="title">Your Story Starts With Us.</h1>
+                    <h4>In a sea of ordinary, make sure your website is set apart from the competition.</h4>
+                    <br>
+                    <a href="{% url 'about_eng' %}" class="btn btn-danger btn-raised btn-lg">
+                        <i class="fa fa-play"> </i> Contact Me!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="section text-center">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="title">Projects</h2>
+                        <h5 class="description">See the latest works</h5>
+                    </div>
+                </div>
+                <div class="features">
+                    <div class="row">
+                        {% for project in projects %}
+                            <div class="col-md-4">
+                                <div class="team-player">
+                                    <div class="card card-plain">
+                                        <div class="col-md-6 ml-auto mr-auto">
+                                            <img src="{{ project.image.url }}" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                                        </div>
+                                        <h4 class="card-title">{{ project.title_eng }}
+                                            <br>
+                                            <small class="card-description text-muted">{{ project.category.title_eng }}</small>
+                                        </h4>
+                                        <div class="card-body">
+                                            <p class="card-description">{{ project.short_description_eng }}</p>
+                                        </div>
+                                        <div class="card-footer justify-content-center">
+                                            <a href="{% url 'project_page_eng' project.slug %}" class="btn btn-raised">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="section text-center">
+                <h2 class="title">Blog</h2>
+                <div class="team">
+                    <div class="row">
+                        <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                        <div class="col-md-6">
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/django-expenses-7dfd8fb13fc9">Django Expenses - Christos Stathakis - Medium</a></h4>
+                                <p>Be aware because is on free tier of heroku maybe will be need on first visit about 20-30 sec to load, then anything is fine!
+                                    And if you want to add data We will create a webapp, which we will add our...</p>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-6">
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/a-story-about-django-react-and-a-cafe-restaurant-webapp-part-1-backend-337bb9b0311e">A Story about Django, React and a cafe restaurant webapp. Part 1 BackEnd</a></h4>
+                                <p>In this tutorial we will create a API with Django and Rest Framework, which will manage, save and store all the data React will send us A live api can be found here → https://react-pos.herokuapp.com/api/ On this two part tutorial, our plan is to create two different technologies on each part.</p>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-6">
+                            <blockquote class="embedly-card" data-card-controls="0">
+                                <h4><a href="https://medium.com/@christosstath10/pos-react-frontend-f04177d9db0">A Story about Django React and restaurant webapp. Part 2 Frontend.</a></h4>
+                                <p>A little explain... this guide is for building a Cafe or Restaurant Order Management App.
+                                    This is the second part of the series . The Part One is for building the backend with django and rest
+                                    framework and you can find it here. In this guide we will use React for building the frontend.</p>
+                            </blockquote>
+                        </div>
+                        {% comment %}
+                        {% for post in posts %}
+                            <div class="col-md-6">
+                            <div class="card card-profile card-plain">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="card-header card-header-image">
+                                            <a href="{% url 'blog_page_eng' post.slug %}">
+                                                <img class="img" src="{{ post.file.url }}">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{ post.title_eng }}</h4>
+                                            <h6 class="category text-muted">{{ post.category_eng }}</h6>
+                                            <p class="card-description">
+                                                {{ post.content_eng|truncatechars:50|safe }}
+                                            </p>
+                                        </div>
+                                        <div class="card-footer justify-content-center">
+                                            <a href="{% url 'blog_page_eng' post.slug %}" class="btn btn-raised">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            <div class="section section-contacts">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="text-center title">About</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-center description">
+                                    My name is Christos Stathakis and i am living in Greece.
+                                    I am a web developer using Python , Django, React etc, and
+                                    i am learning casual programing about machine learning etc.
+                                </h4>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{% static 'assets/img/personal.jpg' %}" class="img img-responsive img-rounded img-thumbnail">
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="subscribe-line">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="title">Get Tips &amp; Tricks every Week!</h3>
+                                    <p class="description">
+                                        Join our newsletter and get news in your inbox every week! We hate spam too, so no worries about this.
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-plain card-form-horizontal">
+                                        <div class="card-body">
+                                            <form method="post">{% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    <i class="material-icons">mail</i>
+                                                                </span>
+                                                            </div>
+                                                            <input type="email" name="email" class="form-control" placeholder="Fill with your email" required id="id_email" />
+                                                            <br>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    Agree to send me emails!
+                                                                </span>
+                                                            </div>
+                                                            <input type="checkbox" name="accept_" class="form-control" placeholder="Fill with your email" required id="id_accept_" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="submit" class="btn btn-primary btn-round btn-block">Subscribe</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <br><br>
+    <div class="main main-raised">{% include 'tim/include/europe_cookie.html' %}</div>
+    <br>
+    <footer class="footer ">
+        <div class="container">
+            <nav class="pull-left">
+                <ul>
+                    <li>
+                        <a href="{% url 'homepage_eng' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'about_eng' %}">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog_eng' %}">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'gallery_eng' %}">
+                            Projects
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright pull-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>, Template created by
+                <a href="https://www.creative-tim.com" target="_blank">Template creative Tim</a>.
+                Designed by Christos Stathakis
+            </div>
+        </div>
+    </footer>
+    {% include 'tim/include/js.html' %}
+    {% block additional_js %}{% endblock %}
+
+</body>
+
+</html>

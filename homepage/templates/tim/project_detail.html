@@ -1,0 +1,75 @@
+{% extends 'tim/index.html' %}
+
+{% block seo %}
+    <title>simply-chris | {{ object.title_eng }}</title>
+    <meta name="description" content="A blog about web development and more!">
+    <meta name="keywords" content="Web Design, python, django">
+{% endblock %}
+
+{% block content %}
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url({{ object.image.url }});">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h1 class="title">{{ object.title_eng }}</h1>
+                    <h4>{{ object.short_description_eng }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="about-team team-1">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Description</h2>
+                        <h5 class="description">{{ object.description_eng|safe }}</h5>
+                    </div>
+                </div>
+
+            </div>
+            <div class="about-services features-2">
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-rose">
+                                <i class="material-icons">link</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">1. GitHub</h4>
+                                <a target='_blank' href="{{ object.github }}">Go to repository</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-rose">
+                                <i class="material-icons">build</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">2. {{ object.tag_demo }}</h4>
+                                <a target='_blank' href="{{ object.href }}">Go to the site</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">More images</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for image in object.imageproject_set.all %}
+                        <div class="col-md-6">
+                            <img class="img img-thumbnail" src="{{ image.image.url }}">   
+                        </div>
+                    {% empty %}
+                        <p>No images added yet!</p>
+                    {% endfor %}
+                </div>   
+            </div>
+            <br><br>
+        </div>
+    </div>
+{% endblock %}
